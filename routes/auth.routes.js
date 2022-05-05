@@ -75,7 +75,6 @@ router.post(
     return res.status(400).json({message:"Invalid password"})
   }
   
-  res.status(200).json({message: "Login is completed"})
 
   const token = jwt.sign(
     {userId: user.id},
@@ -83,7 +82,7 @@ router.post(
     {expiresIn:'1h'}
   )
 
-  res.json({token, userId: user.id})
+  res.status(200).json({userId: user.id, token, message: 'Login is completed'});
 
 
 } catch (e) {
