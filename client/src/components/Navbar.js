@@ -1,31 +1,26 @@
-import React, { useContext } from 'react'
-import {Link, useNavigate} from 'react-router-dom'
-import { LoginContext } from '../context/LoginContext'
+import React, { useContext } from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import { LoginContext } from '../context/LoginContext';
 import {Container, FormControl , NavDropdown, Button,Nav, Form, Navbar } from 'react-bootstrap';
-import {useLogin} from '../hooks/login.hook'
 
 
 export const NavbarMenu = () => {
-  const navigation = useNavigate()
-  const logining = useContext(LoginContext)
-  const {token} = useLogin()
-  const isAuthenticated = !!token
-  const links = !isAuthenticated ? [{url: '/home', text: 'Home'}] :
-  [{url: '/login', text: 'Login'}, {url: '/registration', text: 'Registration'}]
+  const navigation = useNavigate();
+  const { logout, isAuthenticated } = useContext(LoginContext);
+
+  const guestLinks= [{url: '/login', text: 'Login'}, {url: '/registration', text: 'Registration'}];
+  const userLinks = [{url: '/create', text: 'Create'}];
+
+  console.log(isAuthenticated);
+
+  const links = isAuthenticated ? userLinks : guestLinks;
   
-
-
   const logoutHandler = event => {
-    event.preventDefault()
-    logining.logout()
-    navigation.push('/')
-  }
+    event.preventDefault();
+    logout();
+    navigation.push('/');
+  };
 
-  const guestLinks= [{url: '/login', text: 'Login'}, {url: '/registration', text: 'Registration'}]
-  const userLinks = [ {url: '/create', text: 'Create'}]
-  
-
- 
   return ( 
     <Navbar bg="dark" variant="dark" expand="lg">
     <Container fluid>
@@ -37,10 +32,12 @@ export const NavbarMenu = () => {
         style={{ maxHeight: '200px' }}
         navbarScroll
       >
-        {links.map(link => (<Link to={link.url}>{link.text}</Link>))}
-        <Nav.Link as={Link} to="/create">Create</Nav.Link>
-        <Nav.Link as={Link} to="/links">Links</Nav.Link>
-        <Nav.Link as={Link} to="/" onClick={logoutHandler}>Logout</Nav.Link>
+        {
+          links.map((link, index) => (
+            <Nav.Link key={index} as={Link} to={link.url}>{link.text}</Nav.Link>
+          ))
+        }
+        { isAuthenticated && <Nav.Link as={Link} to="/" onClick={logoutHandler}>Logout</Nav.Link> }
         <NavDropdown title="Language" id="navbarScrollingDropdown">
           <NavDropdown.Item href="#action3">EN</NavDropdown.Item>
           <NavDropdown.Item href="#action4">PL</NavDropdown.Item>
@@ -64,5 +61,5 @@ export const NavbarMenu = () => {
     </Navbar.Collapse>
   </Container>
 </Navbar>
-  )
-}
+  );
+};

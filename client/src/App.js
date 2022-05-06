@@ -10,7 +10,8 @@ import {NavbarMenu} from './components/Navbar'
 
 function App() {
   const {token, login, logout, userId, isAuthenticated} = useLogin()
-  const routes = useRoutes(isAuthenticated)
+  const routes = useRoutes(isAuthenticated);
+
   return (
     <LoginContext.Provider value = {{token, login, logout, userId, isAuthenticated}}>
       <Router>
