@@ -15,7 +15,7 @@ const schema = new Schema({
     type: String,
     required: true,
   },
-  links: [{ type: Types.ObjectId, ref: "Link" }],
+  collections: [{ type: Types.ObjectId, ref: "Collection" }],
   roles: [{ type: String, ref: "Role" }],
 });
 

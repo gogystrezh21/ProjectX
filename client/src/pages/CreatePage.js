@@ -13,17 +13,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export const CreatePage = () => {
   const {request} = useHttp()
   const logining = useContext(LoginContext);
-  const [collection, setCollection] = useState('')
+  const [collectionName, setCollection] = useState('')
   const history = useNavigate();
  
   const pressHandler = async event => {
     if (event.key === 'Enter') {
       try {
-        const data = await request('/api/collection/generate', 'POST', {from: collection}, {
+        const data = await request('/api/collection/generate', 'POST', {collectionName}, {
           Authorization: `Bearer ${logining.token}`
         })
         console.log(data)
-        history(`/detail/${data.collection._id}`)
+        history(`/detail/${data.collectionName._id}`)
       } catch (e) {}
     }
   }
@@ -34,10 +34,10 @@ export const CreatePage = () => {
        <InputGroup className="mb-3">
           <FormControl
             placeholder="Collection Name"
-            id="CollectionName"
+            id="collectionName"
             type="text"
-            name="CollectionName"
-            value = {collection}
+            name="collectionName"
+            value = {collectionName}
             onChange = {e=>setCollection(e.target.value)}
             onKeyPress = {pressHandler}
           />

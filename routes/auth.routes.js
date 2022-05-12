@@ -42,9 +42,9 @@ router.post(
           .status(400)
           .json({ message: "User with this email is exist" });
       }
-      const userRole = await Role.findOne({value: "ADMIN"})
+      const userRole = await Role.findOne({value: "USER"})
       const hashedPassword = await bcrypt.hash(password, 7);
-      const user = new User({ username, password: hashedPassword,roles: [userRole], email});
+      const user = new User({ username, password: hashedPassword,roles: [userRole.value], email});
 
       await user.save();
       res.status(201).json({ message: "Rigistration is completed" }); 
