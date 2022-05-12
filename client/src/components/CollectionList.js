@@ -24,7 +24,7 @@ export const CollectionList = ({ collections }) => {
             <tr key={collection._id}>
               <td>{index + 1}</td>
               <td> 
-                <Link to={`/detail/${collection._id}`}>{collection.from}</Link>
+                <Link to={`/detail/${collection._id}`}>{collection.collectionName}</Link>
               </td>
               <td>
                 delete

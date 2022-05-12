@@ -23,7 +23,7 @@ export const CreatePage = () => {
           Authorization: `Bearer ${logining.token}`
         })
         console.log(data)
-        history(`/detail/${data.collectionName._id}`)
+        history(`/detail/${data.collection._id}`)
       } catch (e) {}
     }
   }

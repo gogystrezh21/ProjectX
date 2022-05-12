@@ -44,12 +44,13 @@ router.post(
       }
       const userRole = await Role.findOne({value: "USER"})
       const hashedPassword = await bcrypt.hash(password, 7);
-      const user = new User({ username, password: hashedPassword,roles: [userRole.value], email});
+      const user = new User({ username, password: hashedPassword,roles: [userRole], email});
 
       await user.save();
       res.status(201).json({ message: "Rigistration is completed" }); 
       
     } catch (e) {
+      console.log(e)
       res.status(500).json({ message: "Registration error" });
     }
   }
