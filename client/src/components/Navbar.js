@@ -20,7 +20,7 @@ export const NavbarMenu = () => {
     { url: "/registration", text: "Registration" },
   ];
   const userLinks = [
-    { url: "/create", text: "Create" },
+    { url: "/create", text: "Create Collection" },
     { url: "/collections", text: "My Collections" },
     // { url: "/detail/:id", text: "Detail" },
   ];
@@ -39,7 +39,7 @@ export const NavbarMenu = () => {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
-          Books Collections
+          Collections
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">

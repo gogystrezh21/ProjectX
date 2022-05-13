@@ -1,9 +1,10 @@
-import React, {useState, useContext} from 'react'
-import {useHttp} from '../hooks/http.hook'
+import React, {useState, useContext} from 'react';
+import {useHttp} from '../hooks/http.hook';
 import {
   FormControl,
   InputGroup,
-  Container
+  Container,
+  Button
 } from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import { LoginContext } from '../context/LoginContext';
@@ -11,10 +12,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export const CreatePage = () => {
-  const {request} = useHttp()
+  const {request} = useHttp();
   const logining = useContext(LoginContext);
-  const [collectionName, setCollection] = useState('')
+  const [collectionName, setCollection] = useState('');
   const history = useNavigate();
+  const { loading } = useHttp();
  
   const pressHandler = async event => {
     if (event.key === 'Enter') {
@@ -22,10 +24,20 @@ export const CreatePage = () => {
         const data = await request('/api/collection/generate', 'POST', {collectionName}, {
           Authorization: `Bearer ${logining.token}`
         })
-        console.log(data)
-        history(`/detail/${data.collection._id}`)
+        console.log(data);
+        history(`/detail/${data.collection._id}`);
       } catch (e) {}
     }
+  }
+
+  const clickHandler = async event => {
+      try {
+        const data = await request('/api/collection/generate', 'POST', {collectionName}, {
+          Authorization: `Bearer ${logining.token}`
+        })
+        console.log(data);
+        history(`/detail/${data.collection._id}`);
+      } catch (e) {}
   }
 
   return (
@@ -39,9 +51,18 @@ export const CreatePage = () => {
             name="collectionName"
             value = {collectionName}
             onChange = {e=>setCollection(e.target.value)}
-            onKeyPress = {pressHandler}
+            onKeyPress = {clickHandler}
           />
         </InputGroup>
+        <Button
+          variant="btn btn-primary"
+          className="mb-2 w-100"
+          onChange={(e) => setCollection(e.target.value)}
+          onClick={pressHandler}
+          disabled={loading}
+        >
+          Create Collection
+        </Button>
     </Container>
   )
 }
