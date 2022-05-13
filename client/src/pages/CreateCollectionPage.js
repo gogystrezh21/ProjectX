@@ -11,7 +11,7 @@ import { LoginContext } from '../context/LoginContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-export const CreatePage = () => {
+export const CreateCollectionPage = () => {
   const {request} = useHttp();
   const logining = useContext(LoginContext);
   const [collectionName, setCollection] = useState('');
@@ -51,14 +51,14 @@ export const CreatePage = () => {
             name="collectionName"
             value = {collectionName}
             onChange = {e=>setCollection(e.target.value)}
-            onKeyPress = {clickHandler}
+            onKeyPress = {pressHandler}
           />
         </InputGroup>
         <Button
           variant="btn btn-primary"
           className="mb-2 w-100"
           onChange={(e) => setCollection(e.target.value)}
-          onClick={pressHandler}
+          onClick={clickHandler}
           disabled={loading}
         >
           Create Collection

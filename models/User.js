@@ -15,8 +15,6 @@ const schema = new Schema({
     type: String,
     required: true,
   },
-  collections: [{ type: Types.ObjectId, ref: "Collection" }],
-  roles: [{ type: String, ref: "Role" }],
 });
 
 module.exports = model("User", schema);

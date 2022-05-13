@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const Collection = require("../models/Collection");
+const Item = require("../models/CollectionItem");
 const auth = require("../middleware/auth.middleware");
 const router = Router();
 
@@ -24,9 +25,11 @@ router.get("/:id", auth, async (req, res) => {
 router.post("/generate", auth, async (req, res) => {
   try {
     const { collectionName } = req.body;
-    const existing = await Collection.findOne({ collectionName });
-    if (existing) {
-      return res.json({ collection: existing });
+    const existingCollection = await Collection.findOne({ collectionName });
+    if (existingCollection) {
+      return res
+        .status(400)
+        .json({ message: "Collection with this name is exsist" });
     }
     const collection = new Collection({
       collectionName,
@@ -34,6 +37,42 @@ router.post("/generate", auth, async (req, res) => {
     });
     await collection.save();
     res.status(201).json({ collection });
+  } catch (e) {
+    res.status(500).json({ message: "Error" });
+  }
+});
+
+router.get("/collection/:id/allItems", auth, async (req, res) => {
+  try {
+    const item = await Item.find({ collectionId: req.params.id });
+    res.json(item);
+  } catch (e) {
+    res.status(500).json({ message: "Error" });
+  }
+});
+
+router.get("/collection/:id/:itemId", auth, async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+    res.json(item);
+  } catch (e) {
+    res.status(500).json({ message: "Error" });
+  }
+});
+
+router.post("/:id/createItem", auth, async (req, res) => {
+  try {
+    const { itemName } = req.body;
+    const existingItem = await Item.findOne({ itemName });
+    if (existingItem) {
+      return res.status(400).json({ message: "Item with this name is exsist" });
+    }
+    const item = new Item({
+      itemName,
+      collectionId: req.params.id,
+    });
+    await item.save();
+    res.status(201).json({ item });
   } catch (e) {
     res.status(500).json({ message: "Error" });
   }

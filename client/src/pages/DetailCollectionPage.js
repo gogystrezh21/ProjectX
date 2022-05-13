@@ -5,7 +5,7 @@ import { LoginContext } from "../context/LoginContext";
 import { Loader } from "../components/Loader";
 import { CollectionCard } from "../components/CollectionCard";
 
-export const DetailPage = () => {
+export const DetailCollectionPage = () => {
   const { token } = useContext(LoginContext);
   const { request, loading } = useHttp();
   const [collection, setCollection] = useState(null);
