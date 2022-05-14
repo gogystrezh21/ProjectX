@@ -9,7 +9,7 @@ export const DetailCollectionPage = () => {
   const { token } = useContext(LoginContext);
   const { request, loading } = useHttp();
   const [collection, setCollection] = useState(null);
-  const collectionId = useParams().id;
+  const { id: collectionId} = useParams();
 
   const getCollection = useCallback(async () => {
     try {
@@ -20,13 +20,23 @@ export const DetailCollectionPage = () => {
     } catch (e) {}
   }, [token, collectionId, request]);
 
+  const handleCreateCollectionItem = async (itemName) => {
+    try {
+      const data = await request(`/api/collection/${collectionId}/createItem`, 'POST', {itemName}, {
+        Authorization: `Bearer ${token}`
+      })
+      console.log(data);
+    } catch (e) {}
+  } 
+
   useEffect(() => {
     getCollection();
   }, [getCollection]);
+  
 
   if (loading) {
     return <Loader />;
   }
 
-  return <>{!loading && collection && <CollectionCard collection={collection} />}</>;
+  return <>{collection && <CollectionCard collection={collection} onCreateItem={handleCreateCollectionItem} />}</>;
 };

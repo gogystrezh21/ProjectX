@@ -4,9 +4,9 @@ import { Table, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
 
-export const ItemsList = ({ collections }) => {
+export const ItemsList = ({ items }) => {
   const { loading } = useHttp();
-  if (!collections.length) {
+  if (!items.length) {
     return <p>No items</p>;
   }
 

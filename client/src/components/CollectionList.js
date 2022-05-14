@@ -10,6 +10,8 @@ export const CollectionList = ({ collections }) => {
     return <p>Collection list is Empty!</p>;
   }
 
+  
+
   return (
     <Container className="mt-3 w-75">
       <Table striped bordered hover size="sm">

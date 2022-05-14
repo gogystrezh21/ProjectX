@@ -42,6 +42,18 @@ router.post("/generate", auth, async (req, res) => {
   }
 });
 
+// router.delete("/:id", auth, async (req, res) => {
+//   try {
+//     const collection = await Collection.findById(req.params.id);
+
+//     if (!collection) return res.status(404).json({msg: 'Collection has not found'});
+//     await collection.remove();
+//     res.status(200).json({ message: "Collection successesfuly deleted" });
+//   } catch (e) {
+//     res.status(500).json({ message: "Error" });
+//   }
+// });
+
 router.get("/collection/:id/allItems", auth, async (req, res) => {
   try {
     const item = await Item.find({ collectionId: req.params.id });
@@ -66,6 +78,7 @@ router.post("/:id/createItem", auth, async (req, res) => {
     const existingItem = await Item.findOne({ itemName });
     if (existingItem) {
       return res.status(400).json({ message: "Item with this name is exsist" });
+      
     }
     const item = new Item({
       itemName,
