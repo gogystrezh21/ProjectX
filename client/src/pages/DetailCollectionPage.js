@@ -4,11 +4,14 @@ import { useHttp } from "../hooks/http.hook";
 import { LoginContext } from "../context/LoginContext";
 import { Loader } from "../components/Loader";
 import { CollectionCard } from "../components/CollectionCard";
+import { ItemsList } from "../components/ItemList";
 
 export const DetailCollectionPage = () => {
   const { token } = useContext(LoginContext);
   const { request, loading } = useHttp();
   const [collection, setCollection] = useState(null);
+  const [items, setItems] = useState([]);
+  
   const { id: collectionId} = useParams();
 
   const getCollection = useCallback(async () => {
@@ -26,17 +29,38 @@ export const DetailCollectionPage = () => {
         Authorization: `Bearer ${token}`
       })
       console.log(data);
+      alert(data.message)
     } catch (e) {}
   } 
 
+  const getItems = useCallback(async () => {
+        try {
+      const fetched = await request(`/api/collection/${collectionId}/allItems`, "GET", null, {
+        Authorization: `Bearer ${token}`,
+      });
+      setItems(fetched);
+    } catch (e) {
+    }
+  }, [token,collectionId, request]);
+
   useEffect(() => {
     getCollection();
-  }, [getCollection]);
-  
+    getItems();
+  }, [getCollection, getItems ]);
+ 
 
   if (loading) {
     return <Loader />;
   }
 
-  return <>{collection && <CollectionCard collection={collection} onCreateItem={handleCreateCollectionItem} />}</>;
+  if (!collection) {
+    return <p>Collection is not exsist</p>;
+  }
+
+  return ( 
+  <>
+  <CollectionCard collection={collection} onCreateItem={handleCreateCollectionItem}/>
+  <ItemsList items={items}/>
+  </>
+  );
 };

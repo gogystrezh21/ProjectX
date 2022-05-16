@@ -1,34 +1,32 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Table, Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useHttp } from "../hooks/http.hook";
+import { Table, Button} from "react-bootstrap";
+// import { Link } from "react-router-dom";
+// import { useHttp } from "../hooks/http.hook";
 
-export const ItemsList = ({ items }) => {
-  const { loading } = useHttp();
-  if (!items.length) {
-    return <p>No items</p>;
-  }
+export const ItemsList = ({items}) => {
+  // const [itemName] = useState("");
+  // const { loading } = useHttp();
+  // if (!items.length) {
+  //   return <p>No items</p>;
+  // }
 
   return (
-    <Container className="mt-3 w-75">
-      <Table striped bordered hover size="sm">
+        <Table striped bordered hover size="sm">
         <thead>
           <tr>
             <th>№</th>
-            <th>Collection name</th>
+            <th>Item name</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {collections.map((collection, index) => {
+          {items.map((item, index) => {
             return (
-              <tr key={collection._id}>
+              <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td>
-                  <Link to={`/detail/${collection._id}`}>
-                    {collection.collectionName}
-                  </Link>
+                    {item.itemName}
                 </td>
                 <td >
                   <Button
@@ -36,7 +34,7 @@ export const ItemsList = ({ items }) => {
                     size="sm"
                     className="w-100"
                     // onClick={registerHandler}
-                    disabled={loading}
+                    // disabled={loading}
                   >
                     Delete
                   </Button>
@@ -46,6 +44,5 @@ export const ItemsList = ({ items }) => {
           })}
         </tbody>
       </Table>
-    </Container>
-  );
+     );
 };

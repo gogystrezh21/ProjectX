@@ -54,16 +54,16 @@ router.post("/generate", auth, async (req, res) => {
 //   }
 // });
 
-router.get("/collection/:id/allItems", auth, async (req, res) => {
+router.get("/:id/allItems", auth, async (req, res) => {
   try {
-    const item = await Item.find({ collectionId: req.params.id });
-    res.json(item);
+    const items = await Item.find({ collectionId: req.params.id });
+    res.json(items);
   } catch (e) {
     res.status(500).json({ message: "Error" });
   }
 });
 
-router.get("/collection/:id/:itemId", auth, async (req, res) => {
+router.get("/:id/:itemId", auth, async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);
     res.json(item);
@@ -85,7 +85,7 @@ router.post("/:id/createItem", auth, async (req, res) => {
       collectionId: req.params.id,
     });
     await item.save();
-    res.status(201).json({ item });
+    res.status(201).json({ message: "Item was created" });
   } catch (e) {
     res.status(500).json({ message: "Error" });
   }

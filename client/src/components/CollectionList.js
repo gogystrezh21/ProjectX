@@ -10,16 +10,15 @@ export const CollectionList = ({ collections }) => {
     return <p>Collection list is Empty!</p>;
   }
 
-  
-
-  return (
-    <Container className="mt-3 w-75">
+    return (
+    <Container className="mt-3">
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
             <th>№</th>
-            <th>Collection name</th>
-            <th>Delete</th>
+            <th className="w-50">Collection name</th>
+            <th >Delete Collection</th>
+            <th>Edit Collecton</th>
           </tr>
         </thead>
         <tbody>
@@ -32,15 +31,27 @@ export const CollectionList = ({ collections }) => {
                     {collection.collectionName}
                   </Link>
                 </td>
-                <td >
+                <td>
                   <Button
+                    className="w-100"
                     variant="btn btn-danger" 
                     size="sm"
-                    className="w-100"
                     // onClick={registerHandler}
                     disabled={loading}
                   >
                     Delete
+                  </Button>
+                  
+                </td>
+                <td>
+                <Button
+                    className="w-100"
+                    variant="btn btn-primary" 
+                    size="sm"
+                    // onClick={registerHandler}
+                    disabled={loading}
+                  >
+                    Edit Collection
                   </Button>
                 </td>
               </tr>
