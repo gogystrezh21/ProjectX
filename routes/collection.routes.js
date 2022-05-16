@@ -65,7 +65,7 @@ router.get("/:id/allItems", auth, async (req, res) => {
 
 router.get("/:id/:itemId", auth, async (req, res) => {
   try {
-    const item = await Item.findOne({ collectionId:req.params.id, id: req.params.itemId});
+    const item = await Item.findById(req.params.itemId);
     res.json(item);
   } catch (e) {
     console.log(e)
