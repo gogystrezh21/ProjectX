@@ -65,9 +65,10 @@ router.get("/:id/allItems", auth, async (req, res) => {
 
 router.get("/:id/:itemId", auth, async (req, res) => {
   try {
-    const item = await Item.findById(req.params.id);
+    const item = await Item.findOne({ collectionId:req.params.id, id: req.params.itemId});
     res.json(item);
   } catch (e) {
+    console.log(e)
     res.status(500).json({ message: "Error" });
   }
 });
