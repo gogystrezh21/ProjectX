@@ -26,5 +26,5 @@ export const CollectionsPage = () => {
     return <Loader />;
   }
 
-  return <>{!loading && <CollectionList collections={collections} />}</>;
+  return <>{<CollectionList collections={collections} />}</>;
 };

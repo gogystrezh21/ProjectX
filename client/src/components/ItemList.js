@@ -1,15 +1,14 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Button} from "react-bootstrap";
-// import { Link } from "react-router-dom";
-// import { useHttp } from "../hooks/http.hook";
+import { Link } from "react-router-dom";
+import { useHttp } from "../hooks/http.hook";
 
 export const ItemsList = ({items}) => {
-  // const [itemName] = useState("");
-  // const { loading } = useHttp();
-  // if (!items.length) {
-  //   return <p>No items</p>;
-  // }
+  
+  const { loading } = useHttp();
+  if (!items.length) {
+    return <p>No items</p>;
+  }
 
   return (
         <Table striped bordered hover size="sm">
@@ -26,7 +25,9 @@ export const ItemsList = ({items}) => {
               <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td>
+                    <Link to={`/detail/${item.collectionId}/${item._id}`}>
                     {item.itemName}
+                  </Link>
                 </td>
                 <td >
                   <Button
@@ -34,7 +35,7 @@ export const ItemsList = ({items}) => {
                     size="sm"
                     className="w-100"
                     // onClick={registerHandler}
-                    // disabled={loading}
+                    disabled={loading}
                   >
                     Delete
                   </Button>
