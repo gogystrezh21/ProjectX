@@ -10,7 +10,6 @@ import { LoginContext } from '../context/LoginContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-
 export const CreateCollectionPage = () => {
   const {request} = useHttp();
   const logining = useContext(LoginContext);

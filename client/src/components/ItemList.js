@@ -12,7 +12,7 @@ export const ItemsList = ({items, sortName, directionSort}) => {
 
   const Sorting = () => {
     return (
-      directionSort ? <p className="px-1 my-auto" >(Z-A)</p> : <p className="px-1 my-auto" >(A-Z)</p>
+      directionSort ? <span className=" px-1 my-auto" >(Z-A)</span> : <span className="px-1 my-auto" >(A-Z)</span>
     )
   }
 
@@ -23,14 +23,16 @@ export const ItemsList = ({items, sortName, directionSort}) => {
 
   return (
     <Container className="w-50 mx-auto">
-        <Table striped bordered hover size="sm" className="align-items-center" >
+        <Table bordered hover size="sm" className="align-items-center" >
         <thead >
           <tr >
             <th>№</th>
-            <th role="button" className="d-flex" onClick={()=>{slotSortName('itemName')}}>Item name {slotName === 'itemName' ? <Sorting/> : null} </th>
+            <th role="button" className="" onClick={()=>{slotSortName('itemName')}}>Item name  {slotName === 'itemName' ? <Sorting/> : null} </th>
+            <th>Tags</th>
+            <th role="button" className="" onClick={()=>{slotSortName('_id')}}>Item Id {slotName === '_id' ? <Sorting/> : null} </th>
             <th>Delete</th>
             <th>Edit</th>
-          </tr>
+           </tr>
         </thead>
         <tbody>
           {items.map((item, index) => {
@@ -38,13 +40,22 @@ export const ItemsList = ({items, sortName, directionSort}) => {
               <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td>
-                    <Link to={`/detail/${item.collectionId}/${item._id}`}>
+                  <Link to={`/detail/${item.collectionId}/${item._id}`}>
                     {item.itemName}
                   </Link>
                 </td>
-                <td >
+                <td>
+
+                </td>
+                <td>
+                  <Link to={`/detail/${item.collectionId}/${item._id}`}>
+                    {item._id}
+                  </Link>
+                </td>
+
+                <td>
                   <Button
-                    variant="btn btn-danger" 
+                    variant="btn btn-danger"
                     size="sm"
                     className="w-100"
                     // onClick={registerHandler}
@@ -53,9 +64,9 @@ export const ItemsList = ({items, sortName, directionSort}) => {
                     Delete
                   </Button>
                 </td>
-                <td >
+                <td>
                   <Button
-                    variant="btn btn-primary" 
+                    variant="btn btn-primary"
                     size="sm"
                     className="w-100"
                     // onClick={registerHandler}

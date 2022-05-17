@@ -12,9 +12,19 @@ export const CollectionList = ({ collections }) => {
 
     return (
     <Container className="mt-3">
-      <h2 className="text-center">
+      <h2 className="text-center mb-3">
         My Collections
       </h2>
+      <Button
+        as={Link}
+        variant="btn btn-success"
+        className="mb-3 w-100"
+        // onClick={handleShow}
+        disabled={loading}
+        to="/generate"
+      >
+        Add Collection
+      </Button>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>

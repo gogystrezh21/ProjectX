@@ -4,7 +4,6 @@ import { useHttp } from "../hooks/http.hook";
 import { CreateCollectionItemModal } from "../components/CreateCollectionItemModal";
 
 
-
 export const CollectionCard = ({ collection, onCreateItem}) => {
   const { loading } = useHttp();
   const [show, setShow] = useState(false);
@@ -23,7 +22,7 @@ export const CollectionCard = ({ collection, onCreateItem}) => {
         Description: {collection.collectionDescription}
       </p>
       <p>
-        topic: {collection.collectionTopic}
+        Topic: {collection.collectionTopic}
       </p>
       <Button
         variant="btn btn-success"

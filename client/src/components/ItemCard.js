@@ -11,7 +11,7 @@ export const ItemCard = ({ item }) => {
         Item name:<strong>"{item.itemName}"</strong>
       </h2>
       <p>
-        Views: <strong>{}</strong>
+        Likes: <strong>{}</strong>
       </p>
       <Button
         variant="btn btn-danger"

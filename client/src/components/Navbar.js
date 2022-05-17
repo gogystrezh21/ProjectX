@@ -20,7 +20,7 @@ export const NavbarMenu = () => {
     { url: "/registration", text: "Registration" },
   ];
   const userLinks = [
-    { url: "/create", text: "Create Collection" },
+    { url: "/generate", text: "Create Collection" },
     { url: "/collections", text: "My Collections" },
     // { url: "/detail/:id", text: "Detail" },
   ];

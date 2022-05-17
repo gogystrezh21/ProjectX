@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
 import { LoginContext } from "../context/LoginContext";
 import { Loader } from "../components/Loader";
-
 import { ItemCard } from "../components/ItemCard";
 
 export const DetailItemPage = () => {
