@@ -10,6 +10,7 @@ export const DetailCollectionPage = () => {
   const { token } = useContext(LoginContext);
   const { request, loading } = useHttp();
   const [collection, setCollection] = useState(null);
+  const [directionSort, setDirectionSort] = useState(true);
   const [items, setItems] = useState([]);
   
   const { id: collectionId} = useParams();
@@ -43,6 +44,20 @@ export const DetailCollectionPage = () => {
     }
   }, [token,collectionId, request]);
 
+  const sortName = (sorted)=> {
+    const itemsList = items.concat();
+    let sortName;
+    if (directionSort) { 
+      sortName = itemsList.sort(
+      (a, b) => {return a[sorted] > b[sorted] ? 1 : -1}
+      );
+     } else sortName = itemsList.reverse(
+      (a, b) => {return a[sorted] > b[sorted] ? 1 : -1}
+      );
+    setItems(sortName);
+    setDirectionSort(!directionSort);
+  }
+
   useEffect(() => {
     getCollection();
     getItems();
@@ -60,7 +75,7 @@ export const DetailCollectionPage = () => {
   return ( 
   <>
   <CollectionCard collection={collection} onCreateItem={handleCreateCollectionItem}/>
-  <ItemsList items={items}/>
+  <ItemsList items={items} sortName={sortName} directionSort={directionSort}/>
   </>
   );
 };

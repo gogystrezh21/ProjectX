@@ -12,12 +12,15 @@ export const CollectionList = ({ collections }) => {
 
     return (
     <Container className="mt-3">
+      <h2 className="text-center">
+        My Collections
+      </h2>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
             <th>№</th>
             <th className="w-50">Collection name</th>
-            <th >Delete Collection</th>
+            <th>Delete Collection</th>
             <th>Edit Collecton</th>
           </tr>
         </thead>

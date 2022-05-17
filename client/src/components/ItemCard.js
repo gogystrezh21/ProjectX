@@ -2,13 +2,12 @@ import React from "react";
 import { Container, Button } from "react-bootstrap";
 import { useHttp } from "../hooks/http.hook";
 
+export const ItemCard = ({ item }) => {
+  const { loading } = useHttp();
 
-export const ItemCard = ({item}) => {
-   const { loading } = useHttp();
-  
   return (
     <Container className="mt-3 w-50">
-        <h2>
+      <h2>
         Item name:<strong>"{item.itemName}"</strong>
       </h2>
       <p>
@@ -22,6 +21,6 @@ export const ItemCard = ({item}) => {
       >
         Delete Item
       </Button>
-      </Container>
+    </Container>
   );
 };

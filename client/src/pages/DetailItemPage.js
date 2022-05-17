@@ -23,6 +23,8 @@ export const DetailItemPage = () => {
     }
   }, [token,collectionId,itemId, request]);
 
+ 
+
   useEffect(() => {
     getItem();
   }, [getItem]);
@@ -35,5 +37,5 @@ export const DetailItemPage = () => {
     return <p>Item is not exsist!</p>;
   }
  
-  return <>{<ItemCard item={item}/>}</>;
+  return <>{<ItemCard item={item} />}</>;
 };
