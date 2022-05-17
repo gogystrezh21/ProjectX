@@ -24,15 +24,23 @@ router.get("/:id", auth, async (req, res) => {
 
 router.post("/generate", auth, async (req, res) => {
   try {
-    const { collectionName } = req.body;
-    const existingCollection = await Collection.findOne({ collectionName });
+    const { collectionName, collectionDescription, collectionTopic} = req.body;
+    const existingCollection = await Collection.findOne({ collectionName, collectionDescription, collectionTopic });
     if (existingCollection) {
       return res
         .status(400)
         .json({ message: "Collection with this name is exsist" });
     }
+    const existingTopic = await Collection.findOne({ collectionTopic });
+    if (!existingTopic) {
+      return res
+        .status(400)
+        .json({ message: "Select collection topic" });
+    }
     const collection = new Collection({
       collectionName,
+      collectionTopic,
+      collectionDescription,
       owner: req.user.userId,
     });
     await collection.save();

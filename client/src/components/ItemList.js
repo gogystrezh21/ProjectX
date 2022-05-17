@@ -7,7 +7,7 @@ export const ItemsList = ({items, sortName, directionSort}) => {
   const [slotName, setSlotName]= useState("")
   const { loading } = useHttp();
   if (!items.length) {
-    return <p>No items</p>;
+    return <p className="text-center">No items!</p>;
   }
 
   const Sorting = () => {

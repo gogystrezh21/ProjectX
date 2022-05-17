@@ -4,18 +4,26 @@ import { useHttp } from "../hooks/http.hook";
 import { CreateCollectionItemModal } from "../components/CreateCollectionItemModal";
 
 
+
 export const CollectionCard = ({ collection, onCreateItem}) => {
   const { loading } = useHttp();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+ 
   return (
     <Container className="mt-3 w-50">
       <h2>
-        Collection:<strong>"{collection.collectionName}"</strong>
+        Collection: <strong>"{collection.collectionName}"</strong>
       </h2>
       <p>
-        Views: <strong>{collection.clicks}</strong>
+        Views: {collection.clicks}
+      </p>
+      <p>
+        Description: {collection.collectionDescription}
+      </p>
+      <p>
+        topic: {collection.collectionTopic}
       </p>
       <Button
         variant="btn btn-success"
