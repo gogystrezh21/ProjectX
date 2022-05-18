@@ -57,7 +57,7 @@ export const CreateCollectionPage = () => {
             onChange={(e) => setCollectionDescription(e.target.value)}
             rows={3}
           />
-        </Form.Group>
+        </Form.Group>         
         <Form.Select className="mb-3" value={collectionTopic} onChange={(e) => setCollectionTopic(e.target.value)}>
           <option>Select your collection topic</option>
           <option >Books</option>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { useHttp } from "../hooks/http.hook";
 import { CreateCollectionItemModal } from "../components/CreateCollectionItemModal";
-
+import ReactMarkdown from 'react-markdown';
 
 export const CollectionCard = ({ collection, onCreateItem}) => {
   const { loading } = useHttp();
@@ -18,8 +18,9 @@ export const CollectionCard = ({ collection, onCreateItem}) => {
       <p>
         Views: {collection.clicks}
       </p>
-      <p>
-        Description: {collection.collectionDescription}
+      <p>Description:
+      <ReactMarkdown children={collection.collectionDescription}
+      />
       </p>
       <p>
         Topic: {collection.collectionTopic}

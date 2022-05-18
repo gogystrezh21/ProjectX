@@ -46,6 +46,7 @@ router.post("/generate", auth, async (req, res) => {
     await collection.save();
     res.status(201).json({ collection });
   } catch (e) {
+    console.log(e)
     res.status(500).json({ message: "Error" });
   }
 });
@@ -60,7 +61,7 @@ router.post("/generate", auth, async (req, res) => {
 //   } catch (e) {
 //     res.status(500).json({ message: "Error" });
 //   }
-// });
+});
 
 router.get("/:id/allItems", auth, async (req, res) => {
   try {
