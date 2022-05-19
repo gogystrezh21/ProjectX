@@ -10,11 +10,10 @@ export const CreateCollectionItemModal = ({isShow, onCreateItem, onClose}) => {
     </Modal.Header>
     <Modal.Body>
       <Form>
-        <Form.Group className="mb-3" controlId="">
+        <Form.Group className="mb-3" >
           <Form.Label>Item Name</Form.Label>
           <Form.Control
             onChange={(e) => setItem(e.target.value)}
-            type="email"
             placeholder="Item Name"
             autoFocus
           />

@@ -56,7 +56,7 @@ router.delete("/:id", auth, async (req, res) => {
   try {
     const collection = await Collection.findByIdAndRemove(req.params.id);
 
-    if (!collection) return res.status(404).json({msg: 'Collection has not found'});
+    if (!collection) return res.status(404).json({ message: 'Collection has not found'});
     
     res.status(200).json({ message: "Collection successesfuly deleted" });
   } catch (e) {

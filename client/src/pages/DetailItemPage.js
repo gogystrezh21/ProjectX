@@ -54,7 +54,7 @@ export const DetailItemPage = () => {
   }
 
   if (!item) {
-    return <p>Item is not exsist!</p>;
+    return <h1 className="text-center mt-4">Item is not exsist!</h1>;
   }
  
   return ( 

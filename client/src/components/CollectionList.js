@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
 import { LoginContext } from "../context/LoginContext";
 import deleteLogo from "../assets/delete.png";
+import editLogo from "../assets/edit.png";
 
 export const CollectionList = ({ collections }) => {
   const logining = useContext(LoginContext);
   const { loading, request } = useHttp();
   if (!collections.length) {
-    return <p>Collection list is Empty!</p>;
+    return <h1 className="text-center mt-4">Collection list is Empty!</h1>;
   }
 
   const deleteCollection = async (id) => {
@@ -32,7 +33,6 @@ export const CollectionList = ({ collections }) => {
         as={Link}
         variant="btn btn-success"
         className="mb-3 w-100"
-        // onClick={handleShow}
         disabled={loading}
         to="/generate"
       >
@@ -43,43 +43,42 @@ export const CollectionList = ({ collections }) => {
           <tr>
             <th>№</th>
             <th>Collection name</th>
-            <th>Delete Collection</th>
-            <th>Edit Collecton</th>
+            <th>Delete</th>
+            <th>Edit</th>
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           {collections.map((collection, index) => {
             return (
               <tr key={collection._id}>
                 <td>{index + 1}</td>
                 <td>
-                  <Link to={`/detail/${collection._id}`}>
+                  <Link
+                    to={`/detail/${collection._id}`}
+                    className="text-decoration-none text-dark"
+                  >
                     {collection.collectionName}
                   </Link>
                 </td>
-                <td className="w-10 h-10">
-                  <div className="w-10 h-10">
+                <td>
                   <img
                     src={deleteLogo}
                     alt="deleteLogo"
-                    className="w-10 h-10"
                     type="button"
                     size="sm"
                     onClick={() => deleteCollection(collection._id)}
                     disabled={loading}
                   />
-                  </div >
                 </td>
                 <td>
-                  <Button
-                    className="w-100"
-                    variant="btn btn-primary"
+                  <img
+                    src={editLogo}
+                    alt="deleteLogo"
+                    type="button"
                     size="sm"
-                    // onClick={registerHandler}
+                    // onClick={() => deleteCollection(collection._id)}
                     disabled={loading}
-                  >
-                    Edit Collection
-                  </Button>
+                  />
                 </td>
               </tr>
             );

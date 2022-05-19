@@ -27,7 +27,7 @@ export const CollectionCard = ({ collection, onCreateItem}) => {
       </p>
       <Button
         variant="btn btn-success"
-        className="mb-2 w-100"
+        className="mb-3 w-100"
         onClick={handleShow}
         disabled={loading}
       >

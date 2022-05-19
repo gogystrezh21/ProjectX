@@ -31,7 +31,8 @@ export const DetailCollectionPage = () => {
       })
       console.log(data);
       alert(data.message)
-    } catch (e) {}
+    } catch (e) {
+    }
   } 
 
   const getItems = useCallback(async () => {
@@ -69,7 +70,7 @@ export const DetailCollectionPage = () => {
   }
 
   if (!collection) {
-    return <p>Collection is not exsist</p>;
+    return <h1 className="text-center mt-4">Collection is not exsist</h1>;
   }
 
   return ( 
