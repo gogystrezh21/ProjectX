@@ -12,7 +12,7 @@ export const ItemsList = ({items, sortName, directionSort}) => {
 
   const Sorting = () => {
     return (
-      directionSort ? <span className=" px-1 my-auto" >(Z-A)</span> : <span className="px-1 my-auto" >(A-Z)</span>
+      directionSort ? <span className=" px-1 my-auto">(Z-A)</span> : <span className="px-1 my-auto">(A-Z)</span>
     )
   }
 
