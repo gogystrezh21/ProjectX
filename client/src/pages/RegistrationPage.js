@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
-  FormControl,
-  InputGroup,
   Container,
   Button,
   Nav,
+  Form,
 } from "react-bootstrap";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
 import { useMessage } from "../hooks/message.hook";
 
@@ -42,35 +41,45 @@ export const RegistrationPage = () => {
     <>
       <Container className="mt-3 w-50">
         <h2 className="mb-3 text-center">Registration Form</h2>
-        <InputGroup className="mb-3 w-100 center mx-auto">
-          <FormControl
-            placeholder="Username"
-            id="username"
-            type="text"
-            name="username"
-            onChange={changeHandler}
-          />
-        </InputGroup>
+        <Form>
+          <Form.Group className="mb-3 w-100 center mx-auto">
+            <Form.Control
+              placeholder="Username"
+              id="username"
+              type="text"
+              name="username"
+              onChange={changeHandler}
+            />
+          </Form.Group>
+        </Form>
 
-        <InputGroup className="mb-3">
-          <FormControl
-            placeholder="Email"
-            id="email"
-            type="text"
-            name="email"
-            onChange={changeHandler}
-          />
-        </InputGroup>
+        <Form>
+          <Form.Group className="mb-1">
+            <Form.Control
+              placeholder="Email"
+              id="email"
+              type="text"
+              name="email"
+              onChange={changeHandler}
+            />
+            <Form.Text className="text-muted">
+              Please, include a valid email
+            </Form.Text>
+          </Form.Group>
+        </Form>
 
-        <InputGroup className="mb-3">
-          <FormControl
-            placeholder="Password"
-            id="password"
-            type="password"
-            name="password"
-            onChange={changeHandler}
-          />
-        </InputGroup>
+        <Form>
+          <Form.Group className="mb-1">
+            <Form.Control
+              placeholder="Password"
+              id="password"
+              type="password"
+              name="password"
+              onChange={changeHandler}
+            />
+            <Form.Text className="text-muted">Minimum 4 symbols</Form.Text>
+          </Form.Group>
+        </Form>
 
         <Button
           variant="btn btn-primary"
@@ -80,7 +89,7 @@ export const RegistrationPage = () => {
         >
           Registration
         </Button>
-        <h6 className="mb-1 text-center">Don't have an account?</h6>
+        <h6 className="mb-0 text-center">Don't have an account?</h6>
         <Nav.Link
           as={Link}
           to="/login"

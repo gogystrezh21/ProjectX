@@ -32,13 +32,13 @@ export const NavbarMenu = () => {
   const logoutHandler = (event) => {
     event.preventDefault();
     logout();
-    navigation.push("/");
+    navigation.push("/homepage");
   };
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/homepage">
           Collections
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />

@@ -11,7 +11,7 @@ export const CollectionCard = ({ collection, onCreateItem}) => {
   const handleClose = () => setShow(false);
  
   return (
-    <Container className="mt-3 w-50">
+    <Container className="mt-3 w-100">
       <h2>
         Collection: <strong>"{collection.collectionName}"</strong>
       </h2>

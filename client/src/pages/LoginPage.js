@@ -5,6 +5,7 @@ import {
   Container,
   Button,
   Nav,
+  Form,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
@@ -53,15 +54,16 @@ export const LoginPage = () => {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
-          <FormControl
+        <Form>
+          <Form.Group className="mb-3">
+            <Form.Control
             placeholder="Password"
             id="password"
             type="password"
             name="password"
-            onChange={changeHandler}
-          />
-        </InputGroup>
+            onChange={changeHandler}/>
+          </Form.Group>
+        </Form>
 
         <Button
           variant="btn btn-primary"

@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const Collection = require("../models/Collection");
 const Item = require("../models/CollectionItem");
+const Comment = require("../models/Comment");
 const auth = require("../middleware/auth.middleware");
 const router = Router();
 
@@ -51,16 +52,16 @@ router.post("/generate", auth, async (req, res) => {
   }
 });
 
-// router.delete("/:id", auth, async (req, res) => {
-//   try {
-//     const collection = await Collection.findById(req.params.id);
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const collection = await Collection.findByIdAndRemove(req.params.id);
 
-//     if (!collection) return res.status(404).json({msg: 'Collection has not found'});
-//     await collection.remove();
-//     res.status(200).json({ message: "Collection successesfuly deleted" });
-//   } catch (e) {
-//     res.status(500).json({ message: "Error" });
-//   }
+    if (!collection) return res.status(404).json({msg: 'Collection has not found'});
+    
+    res.status(200).json({ message: "Collection successesfuly deleted" });
+  } catch (e) {
+    res.status(500).json({ message: "Error" });
+  }
 });
 
 router.get("/:id/allItems", auth, async (req, res) => {
@@ -88,7 +89,6 @@ router.post("/:id/createItem", auth, async (req, res) => {
     const existingItem = await Item.findOne({ itemName });
     if (existingItem) {
       return res.status(400).json({ message: "Item with this name is exsist" });
-      
     }
     const item = new Item({
       itemName,
@@ -100,5 +100,40 @@ router.post("/:id/createItem", auth, async (req, res) => {
     res.status(500).json({ message: "Error" });
   }
 });
+
+router.get("/:id/:itemId/allComments", auth, async (req, res) => {
+  try {
+    const comments = await Comment.find({ itemId: req.params.id.itemId });
+    res.json(comments);
+  } catch (e) {
+    res.status(500).json({ message: "Error" });
+  }
+});
+
+router.get("/:id/:itemId/:commentId", auth, async (req, res) => {
+  try {
+    const comment = await Comment.findById(req.params.itemId.commentId);
+    res.json(comment);
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({ message: "Error" });
+  }
+});
+
+router.post("/:id/:itemId/createComment", auth, async (req, res) => {
+  try {
+    const { commentText } = req.body;
+    const comment = new Comment({
+      commentText,
+      itemId: req.params.id.itemId,
+    });
+    await comment.save();
+    res.status(201).json({ message: "Comment was created" });
+  } catch (e) {
+    res.status(500).json({ message: "Error" });
+  }
+});
+
+
 
 module.exports = router;

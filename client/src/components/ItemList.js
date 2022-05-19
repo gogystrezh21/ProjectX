@@ -22,14 +22,14 @@ export const ItemsList = ({items, sortName, directionSort}) => {
   }
 
   return (
-    <Container className="w-50 mx-auto">
-        <Table bordered hover size="sm" className="align-items-center" >
+    <Container className="w-100 mx-auto ">
+        <Table bordered hover size="sm">
         <thead >
           <tr >
             <th>№</th>
-            <th role="button" className="" onClick={()=>{slotSortName('itemName')}}>Item name  {slotName === 'itemName' ? <Sorting/> : null} </th>
+            <th role="button" onClick={()=>{slotSortName('itemName')}}>Item name  {slotName === 'itemName' ? <Sorting/> : null} </th>
             <th>Tags</th>
-            <th role="button" className="" onClick={()=>{slotSortName('_id')}}>Item Id {slotName === '_id' ? <Sorting/> : null} </th>
+            <th role="button" onClick={()=>{slotSortName('_id')}}>Item Id {slotName === '_id' ? <Sorting/> : null} </th>
             <th>Delete</th>
             <th>Edit</th>
            </tr>
@@ -45,10 +45,9 @@ export const ItemsList = ({items, sortName, directionSort}) => {
                   </Link>
                 </td>
                 <td>
-
                 </td>
                 <td>
-                  <Link to={`/detail/${item.collectionId}/${item._id}`}>
+                  <Link  to={`/detail/${item.collectionId}/${item._id}`}>
                     {item._id}
                   </Link>
                 </td>
@@ -80,6 +79,6 @@ export const ItemsList = ({items, sortName, directionSort}) => {
           })}
         </tbody>
       </Table>
-      </Container>
+    </Container>
      );
 };

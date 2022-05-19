@@ -42,7 +42,6 @@ export const CreateCollectionPage = () => {
             name="collectionName"
             value={collectionName}
             onChange={(e) => setCollection(e.target.value)}
-            // onKeyPress = {pressHandler}
           />
         </Form.Group>
         <Form.Group className="mb-3">

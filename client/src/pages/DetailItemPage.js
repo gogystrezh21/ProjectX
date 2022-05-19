@@ -4,13 +4,15 @@ import { useHttp } from "../hooks/http.hook";
 import { LoginContext } from "../context/LoginContext";
 import { Loader } from "../components/Loader";
 import { ItemCard } from "../components/ItemCard";
+import { CommentsList } from "../components/CommentsList";
 
 export const DetailItemPage = () => {
   const { token } = useContext(LoginContext);
   const { request, loading } = useHttp();
   const [item, setItem] = useState('');
+  const [comments, setComments] = useState([]);
   
-  const { id: collectionId,itemId } = useParams();
+  const { id: collectionId,itemId} = useParams();
   
   const getItem = useCallback(async () => {
         try {
@@ -22,11 +24,30 @@ export const DetailItemPage = () => {
     }
   }, [token,collectionId,itemId, request]);
 
- 
+  const handleCreateCollectionItemComment = async (commentText) => {
+    try {
+      const data = await request(`/api/collection/${collectionId}/${itemId}/createComment`, 'POST', {commentText}, {
+        Authorization: `Bearer ${token}`
+      })
+      console.log(data);
+      alert(data.message)
+    } catch (e) {}
+  }
+
+  const getComments = useCallback(async () => {
+    try {
+  const fetched = await request(`/api/collection/${collectionId}/${itemId}/allComments`, "GET", null, {
+    Authorization: `Bearer ${token}`,
+  });
+  setComments(fetched);
+} catch (e) {
+}
+}, [token,collectionId,itemId, request]);
 
   useEffect(() => {
     getItem();
-  }, [getItem]);
+    getComments();
+  }, [getItem, getComments]);
 
   if (loading) {
     return <Loader />;
@@ -36,5 +57,10 @@ export const DetailItemPage = () => {
     return <p>Item is not exsist!</p>;
   }
  
-  return <>{<ItemCard item={item} />}</>;
+  return ( 
+    <>
+    <ItemCard item={item} onCreateItemComment={handleCreateCollectionItemComment}/>
+    <CommentsList comments={comments}/>
+    </>
+    );
 };
