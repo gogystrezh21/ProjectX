@@ -2,7 +2,7 @@
   "name": "projectx",
   "version": "1.0.0",
   "description": "Future Project",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
