@@ -7,24 +7,13 @@ import { LoginContext } from "../context/LoginContext";
 import deleteLogo from "../assets/delete.png";
 import editLogo from "../assets/edit.png";
 
-export const CollectionList = ({ collections }) => {
+
+export const CollectionList = ({ collections, onDeleteCollection }) => {
   const logining = useContext(LoginContext);
   const { loading, request } = useHttp();
   if (!collections.length) {
     return <h1 className="text-center mt-4">Collection list is Empty!</h1>;
   }
-
-  const deleteCollection = async (id) => {
-    try {
-      console.log("hello");
-      const data = await request(`/api/collection/${id}`, "DELETE", {
-        Authorization: `Bearer ${logining.token}`,
-      });
-      console.log(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   return (
     <Container className="mt-3">
@@ -66,7 +55,7 @@ export const CollectionList = ({ collections }) => {
                     alt="deleteLogo"
                     type="button"
                     size="sm"
-                    onClick={() => deleteCollection(collection._id)}
+                    onClick={() => onDeleteCollection(collection._id)}
                     disabled={loading}
                   />
                 </td>

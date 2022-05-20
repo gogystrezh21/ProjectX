@@ -9,6 +9,23 @@ export const CollectionsPage = () => {
   const [collections, setCollection] = useState([]);
   const { loading, request } = useHttp();
   const { token } = useContext(LoginContext);
+
+
+  const deleteCollection = async (id) => {
+    try {
+      const data = await request(`/api/collection/${id}`, "DELETE", {}, {
+        Authorization: `Bearer ${token}`,
+      });
+      const fetched = await request("/api/collection", "GET", null, {
+        Authorization: `Bearer ${token}`,
+      });
+      alert("Collection successesfuly deleted");
+      setCollection(fetched);
+      console.log(data)
+    } catch (e) {
+    }
+  };
+
   const fetchCollections = useCallback(async () => {
     try {
       const fetched = await request("/api/collection", "GET", null, {
@@ -26,5 +43,5 @@ export const CollectionsPage = () => {
     return <Loader />;
   }
 
-  return <>{<CollectionList collections={collections} />}</>;
+  return <>{<CollectionList collections={collections} onDeleteCollection={deleteCollection}/>}</>;
 };

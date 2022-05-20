@@ -32,12 +32,6 @@ router.post("/generate", auth, async (req, res) => {
         .status(400)
         .json({ message: "Collection with this name is exsist" });
     }
-    const existingTopic = await Collection.findOne({ collectionTopic });
-    if (!existingTopic) {
-      return res
-        .status(400)
-        .json({ message: "Select collection topic" });
-    }
     const collection = new Collection({
       collectionName,
       collectionTopic,
@@ -53,12 +47,11 @@ router.post("/generate", auth, async (req, res) => {
 });
 
 router.delete("/:id", auth, async (req, res) => {
-  try {
+  try {  
     const collection = await Collection.findByIdAndRemove(req.params.id);
-
+    const collections = await Collection.find({ owner: req.user.userId });
     if (!collection) return res.status(404).json({ message: 'Collection has not found'});
-    
-    res.status(200).json({ message: "Collection successesfuly deleted" });
+    res.json(collections);
   } catch (e) {
     res.status(500).json({ message: "Error" });
   }
@@ -78,7 +71,6 @@ router.get("/:id/:itemId", auth, async (req, res) => {
     const item = await Item.findById(req.params.itemId);
     res.json(item);
   } catch (e) {
-    console.log(e)
     res.status(500).json({ message: "Error" });
   }
 });
@@ -115,7 +107,6 @@ router.get("/:id/:itemId/:commentId", auth, async (req, res) => {
     const comment = await Comment.findById(req.params.itemId.commentId);
     res.json(comment);
   } catch (e) {
-    console.log(e)
     res.status(500).json({ message: "Error" });
   }
 });
