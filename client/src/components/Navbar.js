@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
 import {
@@ -11,9 +11,15 @@ import {
   Navbar,
 } from "react-bootstrap";
 
-export const NavbarMenu = () => {
+
+export const NavbarMenu = ({switchTheme, theme}) => {
   const navigation = useNavigate();
   const { logout, isAuthenticated } = useContext(LoginContext);
+  // const [theme] = useState('');
+
+  // const switchTheme = () => {
+  //    theme === "onSwitchLight" ? setTheme("onSwitchDark") : setTheme("onSwitchLight");
+  // };
 
   const guestLinks = [
     { url: "/login", text: "Login" },
@@ -26,6 +32,7 @@ export const NavbarMenu = () => {
   ];
 
   console.log(isAuthenticated);
+  console.log(switchTheme)
 
   const links = isAuthenticated ? userLinks : guestLinks;
 
@@ -63,7 +70,7 @@ export const NavbarMenu = () => {
               <NavDropdown.Item href="#action4">PL</NavDropdown.Item>
             </NavDropdown>
             <Form className="d-flex align-items-center">
-              <Form.Check type="switch" id="custom-switch" />
+              <Form.Check type="switch" id="custom-switch" onClick={() => switchTheme(theme)}/>
             </Form>
           </Nav>
           <Form className="d-flex">

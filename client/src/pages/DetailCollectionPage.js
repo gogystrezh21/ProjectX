@@ -29,6 +29,11 @@ export const DetailCollectionPage = () => {
       const data = await request(`/api/collection/${collectionId}/createItem`, 'POST', {itemName}, {
         Authorization: `Bearer ${token}`
       })
+
+      const fetched = await request(`/api/collection/${collectionId}/allItems`, "GET", null, {
+        Authorization: `Bearer ${token}`,
+      });
+      setItems(fetched);
       console.log(data);
       alert(data.message)
     } catch (e) {

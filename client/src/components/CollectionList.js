@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -6,11 +6,15 @@ import { useHttp } from "../hooks/http.hook";
 import { LoginContext } from "../context/LoginContext";
 import deleteLogo from "../assets/delete.png";
 import editLogo from "../assets/edit.png";
+import { EditCollectionModal } from "./EditCollectionModal";
 
 
-export const CollectionList = ({ collections, onDeleteCollection }) => {
+export const CollectionList = ({ collections, onDeleteCollection, onEditCollection }) => {
   const logining = useContext(LoginContext);
   const { loading, request } = useHttp();
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
   if (!collections.length) {
     return <h1 className="text-center mt-4">Collection list is Empty!</h1>;
   }
@@ -65,7 +69,7 @@ export const CollectionList = ({ collections, onDeleteCollection }) => {
                     alt="deleteLogo"
                     type="button"
                     size="sm"
-                    // onClick={() => deleteCollection(collection._id)}
+                    onClick={handleShow}
                     disabled={loading}
                   />
                 </td>
@@ -74,6 +78,12 @@ export const CollectionList = ({ collections, onDeleteCollection }) => {
           })}
         </tbody>
       </Table>
+      <EditCollectionModal
+        onEditCollection={onEditCollection}
+        loading={loading}
+        isShow={show}
+        onClose={handleClose}
+      />
     </Container>
   );
 };

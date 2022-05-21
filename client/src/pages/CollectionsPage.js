@@ -7,9 +7,12 @@ import { CollectionList } from "../components/CollectionList";
 
 export const CollectionsPage = () => {
   const [collections, setCollection] = useState([]);
+  // const [collectionName] = useState('');
   const { loading, request } = useHttp();
   const { token } = useContext(LoginContext);
-
+  // const [collectionDescription, setCollectionDescription] = useState('');
+  // const [collectionTopic, setCollectionTopic] = useState('');
+  // const logining = useContext(LoginContext);
 
   const deleteCollection = async (id) => {
     try {
@@ -25,6 +28,19 @@ export const CollectionsPage = () => {
     } catch (e) {
     }
   };
+
+
+  const editCollection = async () => {
+   console.log("hello");
+  //  try {
+  //   const data = await request('/api/collection/generate', 'PUT', {collectionName, collectionDescription, collectionTopic }, {
+  //     Authorization: `Bearer ${logining.token}`
+  //   })
+  //   console.log(data);
+  // } catch (e) {}
+  };
+
+
 
   const fetchCollections = useCallback(async () => {
     try {
@@ -43,5 +59,5 @@ export const CollectionsPage = () => {
     return <Loader />;
   }
 
-  return <>{<CollectionList collections={collections} onDeleteCollection={deleteCollection}/>}</>;
+  return <>{<CollectionList collections={collections} onDeleteCollection={deleteCollection} onEditCollection={editCollection}/>}</>;
 };

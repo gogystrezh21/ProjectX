@@ -30,12 +30,13 @@ export const CreateCollectionPage = () => {
   }
  
   return (
-    <Container className="mt-3 w-50">
+    <Container className="mt-3 w-50 app_container">
       <h2 className="mb-3 text-center">Create your Collection</h2>
       <Form>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3 ">
           <Form.Label>Name</Form.Label>
           <Form.Control
+            className="app_input"
             placeholder="Collection Name"
             id="collectionName"
             type="text"
@@ -47,6 +48,7 @@ export const CreateCollectionPage = () => {
         <Form.Group className="mb-3">
           <Form.Label>Description with Markdown</Form.Label>
           <Form.Control
+            className="app_input"
             type="text"
             id="collectionDescription"
             name="collectionDescription"
@@ -58,7 +60,7 @@ export const CreateCollectionPage = () => {
           />
         </Form.Group>  
         <Form.Label>Select your collection topic</Form.Label>       
-        <Form.Select className="mb-3" value={collectionTopic} onChange={(e) => setCollectionTopic(e.target.value)}>
+        <Form.Select className="mb-3 app_input" value={collectionTopic} onChange={(e) => setCollectionTopic(e.target.value)}>
           <option>Books (default)</option>
           <option>Signs</option>
           <option>Silverware</option>
@@ -66,8 +68,7 @@ export const CreateCollectionPage = () => {
       </Form>
 
       <Button
-        variant="btn btn-primary"
-        className="mb-2 w-100"
+        className="mb-2 w-100 app_button"
         onChange={(e) => setCollection(e.target.value)}
         onClick={clickHandler}
         disabled={loading}
