@@ -155,6 +155,7 @@ router.post("/:id/:itemId/createComment", auth, async (req, res) => {
       itemId: req.params.id.itemId,
     });
     await comment.save();
+    await Comment.find({ itemId: req.params.id.itemId });
     res.status(201).json({ message: "Comment was created" });
   } catch (e) {
     res.status(500).json({ message: "Error" });

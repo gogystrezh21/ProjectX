@@ -11,7 +11,7 @@ export const CommentsList = ({ comments }) => {
 
   return (
     <Container>
-      {comments.map((comment, index) => {
+      {comments.map((comment) => {
         return (
           <Card className="mb-2 app_input">
             <blockquote className="m-2">

@@ -29,7 +29,10 @@ export const DetailItemPage = () => {
       const data = await request(`/api/collection/${collectionId}/${itemId}/createComment`, 'POST', {commentText}, {
         Authorization: `Bearer ${token}`
       })
+      const fetched = await request(`/api/collection/${collectionId}/${itemId}/allComments`, "GET", null, {
+        Authorization: `Bearer ${token}`});
       console.log(data);
+      setComments(fetched);
       alert(data.message)
     } catch (e) {}
   }
