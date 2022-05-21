@@ -6,7 +6,7 @@ import { LoginContext } from "./context/LoginContext";
 import { NavbarMenu } from "./components/Navbar";
 import { Loader } from "./components/Loader";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useTheme } from './hooks/theme'
+import { useTheme } from './hooks/theme.hook'
 
 import {
  Form

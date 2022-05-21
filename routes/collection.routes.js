@@ -26,7 +26,7 @@ router.get("/:id", auth, async (req, res) => {
 router.post("/generate", auth, async (req, res) => {
   try {
     const { collectionName, collectionDescription, collectionTopic} = req.body;
-    const existingCollection = await Collection.findOne({ collectionName, collectionDescription, collectionTopic });
+    const existingCollection = await Collection.findOne({ collectionName });
     if (existingCollection) {
       return res
         .status(400)
@@ -45,6 +45,21 @@ router.post("/generate", auth, async (req, res) => {
     res.status(500).json({ message: "Error" });
   }
 });
+
+
+router.post("/edit/:id", auth, async (req, res) => {
+  try {
+    const collectionFields = req.body;
+    const collectionId = req.params.id;
+    await Collection.findOneAndUpdate({id:collectionId, owner: req.user.userId }, {$set: collectionFields});
+    const collections = await Collection.find({ owner: req.user.userId });
+    res.status(201).json(collections);
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({ message: "Error" });
+  }
+});
+
 
 router.delete("/:id", auth, async (req, res) => {
   try {  

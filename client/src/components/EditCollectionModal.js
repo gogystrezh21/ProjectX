@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-export const EditCollectionModal = ({ isShow, onEditCollection, onClose }) => {
+export const EditCollectionModal = ({ isShow,onClose, onEditCollection,collectionForEdit} ) => {
   
-  const [collectionName, setCollection] = useState('');
-  const [collectionDescription, setCollectionDescription] = useState('');
-  const [collectionTopic, setCollectionTopic] = useState('')
+  const [collectionName, setCollection] = useState(collectionForEdit.collectionName);
+  const [collectionDescription, setCollectionDescription] = useState(collectionForEdit.collectionDescription);
+  const [collectionTopic, setCollectionTopic] = useState(collectionForEdit.collectionTopic);
+  
+
   return (
     <Modal show={isShow} onHide={onClose}>
       <Modal.Header closeButton>
@@ -49,7 +51,7 @@ export const EditCollectionModal = ({ isShow, onEditCollection, onClose }) => {
         <Button variant="danger" onClick={onClose}>
           Close
         </Button>
-        <Button variant="success" onClick={() => onEditCollection()}>
+        <Button variant="success" onClick={() => onEditCollection(collectionForEdit._id,{collectionTopic, collectionName, collectionDescription})}>
           Edit Collection
         </Button>
       </Modal.Footer>

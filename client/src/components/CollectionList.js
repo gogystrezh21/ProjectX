@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -8,13 +8,28 @@ import deleteLogo from "../assets/delete.png";
 import editLogo from "../assets/edit.png";
 import { EditCollectionModal } from "./EditCollectionModal";
 
-
-export const CollectionList = ({ collections, onDeleteCollection, onEditCollection }) => {
+export const CollectionList = ({
+  collections,
+  onDeleteCollection,
+  onEditCollection,
+}) => {
   const logining = useContext(LoginContext);
   const { loading, request } = useHttp();
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const [сurrentCollectionId, setCurrentCollectionId] = useState("");
+  const handleShow = (id) => {
+    setShow(true);
+    setCurrentCollectionId(id);
+  };
+  const handleClose = () => {
+    setShow(false);
+    setCurrentCollectionId('');
+  };
+  const collectionForEdit = useMemo(
+    () => collections.find((c) => c._id === сurrentCollectionId),
+    [collections, сurrentCollectionId]
+  );
+
   if (!collections.length) {
     return <h1 className="text-center mt-4">Collection list is Empty!</h1>;
   }
@@ -69,7 +84,8 @@ export const CollectionList = ({ collections, onDeleteCollection, onEditCollecti
                     alt="deleteLogo"
                     type="button"
                     size="sm"
-                    onClick={handleShow}
+                    // onClick={handleShow}
+                    onClick={() => handleShow(collection._id)}
                     disabled={loading}
                   />
                 </td>
@@ -77,13 +93,16 @@ export const CollectionList = ({ collections, onDeleteCollection, onEditCollecti
             );
           })}
         </tbody>
+        {collectionForEdit && (
+          <EditCollectionModal
+            collectionForEdit={collectionForEdit}
+            onEditCollection={onEditCollection}
+            loading={loading}
+            isShow={show}
+            onClose={handleClose}
+          />
+        )}
       </Table>
-      <EditCollectionModal
-        onEditCollection={onEditCollection}
-        loading={loading}
-        isShow={show}
-        onClose={handleClose}
-      />
     </Container>
   );
 };

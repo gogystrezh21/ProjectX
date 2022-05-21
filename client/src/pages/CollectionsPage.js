@@ -29,17 +29,16 @@ export const CollectionsPage = () => {
     }
   };
 
-
-  const editCollection = async () => {
-   console.log("hello");
-  //  try {
-  //   const data = await request('/api/collection/generate', 'PUT', {collectionName, collectionDescription, collectionTopic }, {
-  //     Authorization: `Bearer ${logining.token}`
-  //   })
-  //   console.log(data);
-  // } catch (e) {}
+  const editCollection = async (id, collectionInfo) => {
+   try {
+    const data = await request(`/api/collection/edit/${id}`, 'POST', collectionInfo, {
+      Authorization: `Bearer ${token}`
+    })
+    alert("Collection successesfuly updated");
+    setCollection(data);
+    console.log(data);
+  } catch (e) {}
   };
-
 
 
   const fetchCollections = useCallback(async () => {

@@ -8,10 +8,6 @@ body {
   transition: background-color 200ms linear;
 }
 
-.app_logo {
-  color: var(--icon-color);
-  transition: color 500ms linear;
-}
 
 .app_button,
 .app_button:hover,
@@ -21,8 +17,8 @@ body {
   color: var(--button-text-color);
   background-color: var(--button-background-color);
   border-color: var(--button-border-color);
-  transition: color 500ms linear, background-color 500ms linear,
-    border-color 500ms linear;
+  transition: color 400ms linear, background-color 400ms linear,
+    border-color 400ms linear;
 }
 
 .app_input,
@@ -30,8 +26,8 @@ body {
   color: var(--input-text-color);
   background-color: var(--input-background-color);
   border-color: var(--input-border-color);
-  transition: color 500ms linear, background-color 500ms linear,
-    border-color 500ms linear;
+  transition: color 400ms linear, background-color 400ms linear,
+    border-color 400ms linear;
 }
 
 .app_input::placeholder {

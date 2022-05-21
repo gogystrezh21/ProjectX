@@ -4,8 +4,7 @@ import { useLayoutEffect, useState } from 'react'
 // const defaultTheme = isDarkTheme ? 'dark' : 'light'
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState(
-    "light"
+  const [theme, setTheme] = useState(localStorage.getItem('app-theme')
   )
 
   useLayoutEffect(() => {

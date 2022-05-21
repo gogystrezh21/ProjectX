@@ -15,11 +15,6 @@ import {
 export const NavbarMenu = ({switchTheme, theme}) => {
   const navigation = useNavigate();
   const { logout, isAuthenticated } = useContext(LoginContext);
-  // const [theme] = useState('');
-
-  // const switchTheme = () => {
-  //    theme === "onSwitchLight" ? setTheme("onSwitchDark") : setTheme("onSwitchLight");
-  // };
 
   const guestLinks = [
     { url: "/login", text: "Login" },
@@ -28,11 +23,9 @@ export const NavbarMenu = ({switchTheme, theme}) => {
   const userLinks = [
     { url: "/generate", text: "Create Collection" },
     { url: "/collections", text: "My Collections" },
-    // { url: "/detail/:id", text: "Detail" },
   ];
 
   console.log(isAuthenticated);
-  console.log(switchTheme)
 
   const links = isAuthenticated ? userLinks : guestLinks;
 
