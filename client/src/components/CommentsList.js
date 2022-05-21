@@ -13,7 +13,7 @@ export const CommentsList = ({ comments }) => {
     <Container>
       {comments.map((comment, index) => {
         return (
-          <Card className="mb-2">
+          <Card className="mb-2 app_input">
             <blockquote className="m-2">
               <p>{comment.commentText}</p>
               <footer>

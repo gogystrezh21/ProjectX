@@ -39,16 +39,17 @@ export const RegistrationPage = () => {
 
   return (
     <>
-      <Container className="mt-3 w-50">
+      <Container className="mt-3 w-50 ">
         <h2 className="mb-3 text-center">Registration Form</h2>
         <Form>
-          <Form.Group className="mb-3 w-100 center mx-auto">
+          <Form.Group className="mb-3 w-100 center mx-auto ">
             <Form.Control
               placeholder="Username"
               id="username"
               type="text"
               name="username"
               onChange={changeHandler}
+              className="app_input"
             />
           </Form.Group>
         </Form>
@@ -61,6 +62,7 @@ export const RegistrationPage = () => {
               type="text"
               name="email"
               onChange={changeHandler}
+              className="app_input"
             />
             <Form.Text className="text-muted">
               Please, include a valid email
@@ -76,14 +78,14 @@ export const RegistrationPage = () => {
               type="password"
               name="password"
               onChange={changeHandler}
+              className="app_input"
             />
             <Form.Text className="text-muted">Minimum 4 symbols</Form.Text>
           </Form.Group>
         </Form>
 
         <Button
-          variant="btn btn-primary"
-          className="mb-2 w-100 center mx-auto"
+          className="mb-2 w-100 center mx-auto app_button"
           onClick={registerHandler}
           disabled={loading}
         >

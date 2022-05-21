@@ -61,7 +61,7 @@ export const CreateCollectionPage = () => {
         </Form.Group>  
         <Form.Label>Select your collection topic</Form.Label>       
         <Form.Select className="mb-3 app_input" value={collectionTopic} onChange={(e) => setCollectionTopic(e.target.value)}>
-          <option>Books (default)</option>
+          <option >Books (default)</option>
           <option>Signs</option>
           <option>Silverware</option>
         </Form.Select>

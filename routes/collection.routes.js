@@ -5,6 +5,8 @@ const Comment = require("../models/Comment");
 const auth = require("../middleware/auth.middleware");
 const router = Router();
 
+//collections get
+
 router.get("/", auth, async (req, res) => {
   try {
     const collections = await Collection.find({ owner: req.user.userId });
@@ -14,6 +16,9 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+
+//collection get
+
 router.get("/:id", auth, async (req, res) => {
   try {
     const collection = await Collection.findById(req.params.id);
@@ -22,6 +27,8 @@ router.get("/:id", auth, async (req, res) => {
     res.status(500).json({ message: "Error" });
   }
 });
+
+//collection add
 
 router.post("/generate", auth, async (req, res) => {
   try {
@@ -46,6 +53,7 @@ router.post("/generate", auth, async (req, res) => {
   }
 });
 
+//collection eddit
 
 router.post("/edit/:id", auth, async (req, res) => {
   try {
@@ -60,6 +68,7 @@ router.post("/edit/:id", auth, async (req, res) => {
   }
 });
 
+//collection create
 
 router.delete("/:id", auth, async (req, res) => {
   try {  
@@ -72,6 +81,8 @@ router.delete("/:id", auth, async (req, res) => {
   }
 });
 
+//items get
+
 router.get("/:id/allItems", auth, async (req, res) => {
   try {
     const items = await Item.find({ collectionId: req.params.id });
@@ -81,6 +92,8 @@ router.get("/:id/allItems", auth, async (req, res) => {
   }
 });
 
+//item get
+
 router.get("/:id/:itemId", auth, async (req, res) => {
   try {
     const item = await Item.findById(req.params.itemId);
@@ -89,6 +102,8 @@ router.get("/:id/:itemId", auth, async (req, res) => {
     res.status(500).json({ message: "Error" });
   }
 });
+
+//item add
 
 router.post("/:id/createItem", auth, async (req, res) => {
   try {
@@ -108,6 +123,8 @@ router.post("/:id/createItem", auth, async (req, res) => {
   }
 });
 
+//comments get
+
 router.get("/:id/:itemId/allComments", auth, async (req, res) => {
   try {
     const comments = await Comment.find({ itemId: req.params.id.itemId });
@@ -117,6 +134,8 @@ router.get("/:id/:itemId/allComments", auth, async (req, res) => {
   }
 });
 
+//comment get
+
 router.get("/:id/:itemId/:commentId", auth, async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.itemId.commentId);
@@ -125,6 +144,8 @@ router.get("/:id/:itemId/:commentId", auth, async (req, res) => {
     res.status(500).json({ message: "Error" });
   }
 });
+
+//comment add
 
 router.post("/:id/:itemId/createComment", auth, async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-import React, { useContext, useState} from "react";
+import React, { useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
 import {
@@ -36,9 +36,9 @@ export const NavbarMenu = ({switchTheme, theme}) => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar expand="lg" className="app_navbar">
       <Container fluid>
-        <Navbar.Brand as={Link} to="/homepage">
+        <Navbar.Brand className="navbar-brand" as={Link} to="/homepage">
           Collections
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -58,7 +58,7 @@ export const NavbarMenu = ({switchTheme, theme}) => {
                 Logout
               </Nav.Link>
             )}
-            <NavDropdown title="Language" id="navbarScrollingDropdown">
+            <NavDropdown  title="Language">
               <NavDropdown.Item href="#action3">EN</NavDropdown.Item>
               <NavDropdown.Item href="#action4">PL</NavDropdown.Item>
             </NavDropdown>
@@ -68,12 +68,11 @@ export const NavbarMenu = ({switchTheme, theme}) => {
           </Nav>
           <Form className="d-flex">
             <FormControl
+              className="app_input me-2"
               type="search"
               placeholder="Search"
-              className="me-2"
-              aria-label="Search"
             />
-            <Button variant="btn btn-primary">Search</Button>
+            <Button className="app_button">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

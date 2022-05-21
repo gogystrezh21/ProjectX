@@ -26,8 +26,7 @@ export const CollectionCard = ({ collection, onCreateItem}) => {
         Topic: {collection.collectionTopic}
       </p>
       <Button
-        variant="btn btn-success"
-        className="mb-3 w-100"
+        className="mb-3 w-100 app_button"
         onClick={handleShow}
         disabled={loading}
       >

@@ -7,11 +7,6 @@ import { NavbarMenu } from "./components/Navbar";
 import { Loader } from "./components/Loader";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useTheme } from './hooks/theme.hook'
-
-import {
- Form
-} from "react-bootstrap";
-
 import './App.css'
 
 function App() {

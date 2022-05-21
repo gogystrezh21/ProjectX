@@ -1,13 +1,22 @@
 .app_container {
   background-color: var(--background-color);
-  transition: background-color 200ms linear;
+
 }
 
 body {
   background-color: var(--background-color);
-  transition: background-color 200ms linear;
 }
 
+.dropdown-menu {
+  background-color: var(--dropdown-background-color);
+  
+}
+
+.dropdown-item,
+.dropdown-item:hover {
+  color: var(--dropdown-text-color);
+  background-color: var(--dropdown-item-background-color);
+}
 
 .app_button,
 .app_button:hover,
@@ -17,20 +26,43 @@ body {
   color: var(--button-text-color);
   background-color: var(--button-background-color);
   border-color: var(--button-border-color);
-  transition: color 400ms linear, background-color 400ms linear,
-    border-color 400ms linear;
 }
+
+.app_navbar {
+  background-color: var(--navbar-background-color);
+  color: var(--navbar-a-color);
+}
+
+.navbar-brand, .nav-link, h2, .text-dark, thead, p , td, .text-muted{
+  color:  var(--navbar-brand-color)!important;
+}
+
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: var(--form-control-color);
+  border-color:var(--form-border-control-color);
+}
+
+.form-check-input:checked {
+  background-color: #5c868D;
+}
+
+.form-select:focus {
+  box-shadow: var(--form-control-color);
+}
+
+table,tbody {
+  border-color: var(--table-border-color)!important;
+}
+
 
 .app_input,
 .app_input:focus {
   color: var(--input-text-color);
   background-color: var(--input-background-color);
   border-color: var(--input-border-color);
-  transition: color 400ms linear, background-color 400ms linear,
-    border-color 400ms linear;
 }
 
 .app_input::placeholder {
   color: var(--input-placeholder-text-color);
-  transition: color 500ms linear;
 }

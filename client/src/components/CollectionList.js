@@ -1,9 +1,8 @@
-import React, { useContext, useState, useMemo } from "react";
+import React, {useState, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
-import { LoginContext } from "../context/LoginContext";
 import deleteLogo from "../assets/delete.png";
 import editLogo from "../assets/edit.png";
 import { EditCollectionModal } from "./EditCollectionModal";
@@ -13,8 +12,7 @@ export const CollectionList = ({
   onDeleteCollection,
   onEditCollection,
 }) => {
-  const logining = useContext(LoginContext);
-  const { loading, request } = useHttp();
+  const { loading} = useHttp();
   const [show, setShow] = useState(false);
   const [сurrentCollectionId, setCurrentCollectionId] = useState("");
   const handleShow = (id) => {
@@ -35,12 +33,11 @@ export const CollectionList = ({
   }
 
   return (
-    <Container className="mt-3">
+    <Container className="mt-3 ">
       <h2 className="text-center mb-3">My Collections</h2>
       <Button
         as={Link}
-        variant="btn btn-success"
-        className="mb-3 w-100"
+        className="mb-3 w-100 app_button"
         disabled={loading}
         to="/generate"
       >

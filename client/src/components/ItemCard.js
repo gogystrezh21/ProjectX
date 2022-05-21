@@ -30,6 +30,7 @@ export const ItemCard = ({ item, onCreateItemComment}) => {
       <Form>
         <Form.Group className="mb-3">
           <Form.Control 
+          className="mb-3 w-100 app_input"
           type="email" 
           placeholder="Add comment" 
           as="textarea" 
@@ -38,9 +39,8 @@ export const ItemCard = ({ item, onCreateItemComment}) => {
           />
         </Form.Group>
         <Button
-          variant="primary"
           type="submit"
-          className="mb-3 w-100"
+          className="mb-3 w-100 app_button"
           onClick={() => onCreateItemComment(commentText)}>
           Add your comment!
         </Button>

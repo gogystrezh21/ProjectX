@@ -46,6 +46,7 @@ export const LoginPage = () => {
         <h2 className="mb-3 text-center">Sign In</h2>
         <InputGroup className="mb-3">
           <FormControl
+            className="app_input"
             placeholder="Email"
             id="email"
             type="text"
@@ -57,6 +58,7 @@ export const LoginPage = () => {
         <Form>
           <Form.Group className="mb-3">
             <Form.Control
+            className="app_input"
             placeholder="Password"
             id="password"
             type="password"
@@ -66,8 +68,7 @@ export const LoginPage = () => {
         </Form>
 
         <Button
-          variant="btn btn-primary"
-          className="mb-2 w-100 center mx-auto"
+          className="mb-2 w-100 center mx-auto app_button"
           onClick={loginHandler}
           disabled={loading}
         >
