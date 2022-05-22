@@ -53,7 +53,7 @@ router.post("/generate", auth, async (req, res) => {
   }
 });
 
-//collection eddit
+//collection edit
 
 router.post("/edit/:id", auth, async (req, res) => {
   try {
@@ -63,12 +63,11 @@ router.post("/edit/:id", auth, async (req, res) => {
     const collections = await Collection.find({ owner: req.user.userId });
     res.status(201).json(collections);
   } catch (e) {
-    console.log(e)
     res.status(500).json({ message: "Error" });
   }
 });
 
-//collection create
+//collection delete
 
 router.delete("/:id", auth, async (req, res) => {
   try {  
@@ -122,6 +121,35 @@ router.post("/:id/createItem", auth, async (req, res) => {
     res.status(500).json({ message: "Error" });
   }
 });
+
+//item delete
+
+router.delete("/:id/:itemId", auth, async (req, res) => {
+  try {  
+    const item = await Item.findByIdAndRemove(req.params.itemId);
+    const items = await Item.find({ collectionId: req.params.id  });
+    if (!item) return res.status(404).json({ message: 'Item has not found'});
+    res.json(items);
+  } catch (e) {
+    res.status(500).json({ message: "Error" });
+  }
+});
+
+//item edit
+
+router.post("/edit/:id/:itemId", auth, async (req, res) => {
+  try {
+    const ItemFields = req.body;
+    const itemId = req.params.itemId;
+    const editItem = await Item.findOneAndUpdate({collectionId: req.params.id, id:itemId  }, {$set: ItemFields}, { new: true });
+    const items = await Item.find({ collectionId: req.params.id });
+    res.status(201).json(items);
+    console.log({id:itemId, collectionId: req.params.id } )
+  } catch (e) {
+    res.status(500).json({ message: "Error" });
+  }
+});
+
 
 //comments get
 

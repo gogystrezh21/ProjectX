@@ -50,6 +50,34 @@ export const DetailCollectionPage = () => {
     }
   }, [token,collectionId, request]);
 
+
+  const deleteItem = async (id) => {
+    try {
+      const data = await request(`/api/collection/${collectionId}/${id}`, "DELETE", {}, {
+        Authorization: `Bearer ${token}`,
+      });
+      const fetched = await request(`/api/collection/${collectionId}/allItems`, "GET", null, {
+        Authorization: `Bearer ${token}`,
+      });
+      alert("Item successesfuly deleted");
+      setItems(fetched);
+      console.log(data)
+    } catch (e) {
+    }
+  };
+
+  const editItem = async (id, itemInfo) => {
+    try {
+     const data = await request(`/api/collection/edit/${collectionId}/${id}`, 'POST', itemInfo, {
+       Authorization: `Bearer ${token}`
+     })
+     alert("Item successesfuly updated");
+     setItems(data);
+     console.log(data);
+   } catch (e) {}
+   };
+ 
+
   const sortName = (sorted)=> {
     const itemsList = items.concat();
     let sortName;
@@ -81,7 +109,7 @@ export const DetailCollectionPage = () => {
   return ( 
   <>
   <CollectionCard collection={collection} onCreateItem={handleCreateCollectionItem}/>
-  <ItemsList items={items} sortName={sortName} directionSort={directionSort}/>
+  <ItemsList items={items} sortName={sortName} directionSort={directionSort} onDeleteItem={deleteItem} onEditItem={editItem} />
   </>
   );
 };

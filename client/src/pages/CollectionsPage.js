@@ -7,12 +7,9 @@ import { CollectionList } from "../components/CollectionList";
 
 export const CollectionsPage = () => {
   const [collections, setCollection] = useState([]);
-  // const [collectionName] = useState('');
   const { loading, request } = useHttp();
   const { token } = useContext(LoginContext);
-  // const [collectionDescription, setCollectionDescription] = useState('');
-  // const [collectionTopic, setCollectionTopic] = useState('');
-  // const logining = useContext(LoginContext);
+
 
   const deleteCollection = async (id) => {
     try {

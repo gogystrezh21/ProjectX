@@ -1,21 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-export const EditCollectionModal = ({
-  isShow,
-  onClose,
-  onEditCollection,
-  collectionForEdit,
-}) => {
-  const [collectionName, setCollection] = useState(
-    collectionForEdit.collectionName
-  );
-  const [collectionDescription, setCollectionDescription] = useState(
-    collectionForEdit.collectionDescription
-  );
-  const [collectionTopic, setCollectionTopic] = useState(
-    collectionForEdit.collectionTopic
-  );
+export const EditCollectionModal = ({ isShow,onClose, onEditCollection,collectionForEdit} ) => {
+
+  const [collectionName, setCollection] = useState(collectionForEdit.collectionName);
+  const [collectionDescription, setCollectionDescription] = useState(collectionForEdit.collectionDescription);
+  const [collectionTopic, setCollectionTopic] = useState(collectionForEdit.collectionTopic);
 
   return (
     <Modal show={isShow} onHide={onClose} >

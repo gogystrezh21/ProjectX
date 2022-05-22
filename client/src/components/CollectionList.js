@@ -24,7 +24,7 @@ export const CollectionList = ({
     setCurrentCollectionId('');
   };
   const collectionForEdit = useMemo(
-    () => collections.find((c) => c._id === сurrentCollectionId),
+    () => collections.find((collection) => collection._id === сurrentCollectionId),
     [collections, сurrentCollectionId]
   );
 
@@ -81,7 +81,6 @@ export const CollectionList = ({
                     alt="deleteLogo"
                     type="button"
                     size="sm"
-                    // onClick={handleShow}
                     onClick={() => handleShow(collection._id)}
                     disabled={loading}
                   />
