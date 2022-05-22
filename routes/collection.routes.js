@@ -59,7 +59,7 @@ router.post("/edit/:id", auth, async (req, res) => {
   try {
     const collectionFields = req.body;
     const collectionId = req.params.id;
-    await Collection.findOneAndUpdate({id:collectionId, owner: req.user.userId }, {$set: collectionFields});
+    await Collection.findOneAndUpdate({_id:collectionId }, {$set: collectionFields});
     const collections = await Collection.find({ owner: req.user.userId });
     res.status(201).json(collections);
   } catch (e) {
@@ -141,10 +141,9 @@ router.post("/edit/:id/:itemId", auth, async (req, res) => {
   try {
     const ItemFields = req.body;
     const itemId = req.params.itemId;
-    const editItem = await Item.findOneAndUpdate({collectionId: req.params.id, id:itemId  }, {$set: ItemFields}, { new: true });
+    await Item.findOneAndUpdate({collectionId: req.params.id, _id:itemId  }, {$set: ItemFields});
     const items = await Item.find({ collectionId: req.params.id });
     res.status(201).json(items);
-    console.log({id:itemId, collectionId: req.params.id } )
   } catch (e) {
     res.status(500).json({ message: "Error" });
   }

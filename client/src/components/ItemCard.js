@@ -19,14 +19,6 @@ export const ItemCard = ({ item, onCreateItemComment}) => {
       <p>
         Tags: <strong>{}</strong>
       </p>
-      <Button
-        variant="btn btn-danger"
-        className="mb-3 w-100"
-        // onClick={handleShow}
-        disabled={loading}
-      >
-        Delete Item
-      </Button>
       <Form>
         <Form.Group className="mb-3">
           <Form.Control 
