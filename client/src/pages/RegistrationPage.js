@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Button,
@@ -7,11 +7,9 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
-import { useMessage } from "../hooks/message.hook";
 
 export const RegistrationPage = () => {
-  const message = useMessage();
-  const { loading, request, cleaner, error } = useHttp();
+  const { loading, request} = useHttp();
   const history = useNavigate();
   const [form, setForm] = useState({
     username: "",
@@ -19,10 +17,6 @@ export const RegistrationPage = () => {
     password: "",
   });
 
-  useEffect(() => {
-    message(error);
-    cleaner();
-  }, [error, message, cleaner]);
 
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });

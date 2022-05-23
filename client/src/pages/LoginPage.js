@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,  useState } from "react";
 import {
   FormControl,
   InputGroup,
@@ -10,21 +10,15 @@ import {
 import { Link } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
 import { useHttp } from "../hooks/http.hook";
-import { useMessage } from "../hooks/message.hook";
+
 
 export const LoginPage = () => {
   const logining = useContext(LoginContext);
-  const message = useMessage();
-  const { loading, request, cleaner, error } = useHttp();
+  const { loading, request} = useHttp();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    message(error);
-    cleaner();
-  }, [error, message, cleaner]);
 
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
