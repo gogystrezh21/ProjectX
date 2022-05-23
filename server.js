@@ -8,6 +8,7 @@ app.use(express.json({ extended: true }));
 
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/collection", require("./routes/collection.routes"));
+app.use("/api/guest", require("./routes/guest.routes"));
 
 if (process.env.NODE_ENV === 'production') {
   // set static folder

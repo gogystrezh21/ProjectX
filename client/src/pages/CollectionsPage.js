@@ -37,7 +37,6 @@ export const CollectionsPage = () => {
   } catch (e) {}
   };
 
-
   const fetchCollections = useCallback(async () => {
     try {
       const fetched = await request("/api/collection", "GET", null, {

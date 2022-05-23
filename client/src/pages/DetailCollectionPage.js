@@ -66,6 +66,7 @@ export const DetailCollectionPage = () => {
     }
   };
 
+
   const editItem = async (id, itemInfo) => {
     try {
      const data = await request(`/api/collection/edit/${collectionId}/${id}`, 'POST', itemInfo, {

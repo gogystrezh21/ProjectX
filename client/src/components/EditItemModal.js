@@ -11,8 +11,6 @@ export const EditItemModal = ({
     itemForEdit.itemName
   );
 
-  console.log(itemForEdit._id)
-
   return (
     <Modal show={isShow} onHide={onClose} >
       <Modal.Header closeButton className="app_input">

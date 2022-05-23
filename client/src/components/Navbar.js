@@ -32,7 +32,7 @@ export const NavbarMenu = ({switchTheme, theme}) => {
   const logoutHandler = (event) => {
     event.preventDefault();
     logout();
-    navigation.push("/homepage");
+    navigation("/homepage");
   };
 
   return (

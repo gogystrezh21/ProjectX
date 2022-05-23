@@ -16,7 +16,6 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-
 //collection get
 
 router.get("/:id", auth, async (req, res) => {
@@ -71,6 +70,7 @@ router.post("/edit/:id", auth, async (req, res) => {
 
 router.delete("/:id", auth, async (req, res) => {
   try {  
+    await Item.find({ collectionId: req.params.id }).remove();
     const collection = await Collection.findByIdAndRemove(req.params.id);
     const collections = await Collection.find({ owner: req.user.userId });
     if (!collection) return res.status(404).json({ message: 'Collection has not found'});
@@ -126,6 +126,7 @@ router.post("/:id/createItem", auth, async (req, res) => {
 
 router.delete("/:id/:itemId", auth, async (req, res) => {
   try {  
+    await Comment.find({ itemId: req.params.itemId }).remove();
     const item = await Item.findByIdAndRemove(req.params.itemId);
     const items = await Item.find({ collectionId: req.params.id  });
     if (!item) return res.status(404).json({ message: 'Item has not found'});
@@ -154,19 +155,8 @@ router.post("/edit/:id/:itemId", auth, async (req, res) => {
 
 router.get("/:id/:itemId/allComments", auth, async (req, res) => {
   try {
-    const comments = await Comment.find({ itemId: req.params.id.itemId });
+    const comments = await Comment.find({ itemId: req.params.itemId });
     res.json(comments);
-  } catch (e) {
-    res.status(500).json({ message: "Error" });
-  }
-});
-
-//comment get
-
-router.get("/:id/:itemId/:commentId", auth, async (req, res) => {
-  try {
-    const comment = await Comment.findById(req.params.itemId.commentId);
-    res.json(comment);
   } catch (e) {
     res.status(500).json({ message: "Error" });
   }
@@ -179,10 +169,10 @@ router.post("/:id/:itemId/createComment", auth, async (req, res) => {
     const { commentText } = req.body;
     const comment = new Comment({
       commentText,
-      itemId: req.params.id.itemId,
+      itemId: req.params.itemId
     });
     await comment.save();
-    await Comment.find({ itemId: req.params.id.itemId });
+    await Comment.find({ itemId: req.params.itemId });
     res.status(201).json({ message: "Comment was created" });
   } catch (e) {
     res.status(500).json({ message: "Error" });
